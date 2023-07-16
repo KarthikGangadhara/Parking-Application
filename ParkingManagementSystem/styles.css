@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.background-image {
+    background-image: url('https://circontrol.com/wp-content/uploads/2019/02/180125-Circontrol-BAIXA-80.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+  }
+.section{
+    height: 50vh;
+    width: 100%;
+    border: 1px solid rgb(122, 65, 58);
+    border-radius: 5px;
+    opacity: 0.8;
+}
+.ui.primary.button,.ui.green.button {
+    width: 100%;
+    height: 100%;
+    font-size: 30px !important;
+    font-weight: bolder;
+    color: black;
+  }
+  .container {
+    width: 100px;
+    /* border:1px solid black; */
+    margin: 100px auto;
+  }
+input[type="text"] {
+    width: 50px;
+}

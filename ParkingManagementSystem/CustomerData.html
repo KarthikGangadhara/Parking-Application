@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Customers</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <style>
+      body {
+        margin-top: 10px;
+        padding: 0;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="ui container">
+      <h2 class="ui header">Customers</h2>
+      <div class="ui stackable grid">
+        <div class="row">
+          <div class="sixteen wide mobile twelve wide tablet twelve wide computer column">
+            <table class="ui celled table" id="customerTable">
+                <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Mobile</th>
+                      <th>Vehicle Number</th>
+                      <th>E-Mail</th>
+                      <th>Parking Place</th>
+                      <th>Parking Number</th>
+                      <th>Parked</th>
+                      <th>Started</th>
+                      <th>Reached in 5 Mins</th>
+                      <th>Reached</th>
+                      <th>Delivered</th>
+                      <th>Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <tr>
+                      <td>Data 1</td>
+                      <td>Data 2</td>
+                      <td>Data 3</td>
+                      <td>Data 4</td>
+                      <td>Data 5</td>
+                      <td>Data 6</td>
+                      <td>
+                        <button class="ui button blue">Parked</button>
+                      </td>
+                      <td>
+                        <button class="ui button blue">Started</button>
+                      </td>
+                      <td>
+                        <button class="ui button blue">Reached in 5 Mins</button>
+                      </td>
+                      <td>
+                        <button class="ui button blue">Reached</button>
+                      </td>
+                      <td>
+                        <button class="ui button blue">Delivered</button>
+                      </td>
+                    </tr> -->
+                    <!-- Add more rows as needed -->
+                  </tbody> 
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+
+            function getCustomerDetails() {
+      const url = 'http://localhost:80/get_customers.php'; // Replace with the actual URL of your PHP script
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+        console.log(data);
+          const customerTable = document.getElementById('customerTable');
+          data.forEach(customer => {
+            const row = customerTable.insertRow();
+            row.insertCell().textContent = customer.name;
+            row.insertCell().textContent = customer.mobile;
+            row.insertCell().textContent = customer.vehicle_number;
+            row.insertCell().textContent = customer.email;
+            row.insertCell().textContent = customer.parking_place;
+            row.insertCell().textContent = customer.status;
+            row.insertCell().innerHTML=`<button class="ui button blue">Parked</button>`;
+            row.insertCell().innerHTML=`<button class="ui button blue">Started</button>`;
+            row.insertCell().innerHTML=`<button class="ui button blue">Reached in 5 Mins</button>`;
+            row.insertCell().innerHTML=`<button class="ui button blue">Reached</button>`;
+            row.insertCell().innerHTML=`<button class="ui button blue">Delivered</button>`;
+            row.insertCell().innerHTML=`<a href="User Form.html"><button class="ui button blue" onClick="OpenEditPage()">Edit</button></a>`
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred while fetching customer details.');
+        });
+    }
+   getCustomerDetails();
+  function OpenEditPage(){
+    document.getElementsByName('name')[0].value = customerDetails.name; 
+   }
+
+  </script>
+</html>

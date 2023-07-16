@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Form</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin:50px auto;
+      }
+
+      .card {
+        max-width: 500px;
+        padding: 20px;
+        width: 100%;
+      }
+      .submit-button {
+    margin-top: 20px;
+  }
+
+  /* Hide the parking fields initially */
+.hidden-field {
+    display: none;
+  }
+    </style>
+  </head>
+  <body>
+    <div class="ui container">
+      <div class="ui centered card">
+        <div class="content">
+          <h3 class="ui header">Please Fill the Form Below</h3>
+          <form class="ui form" id="customerForm">
+            <div class="field">
+              <label>Name</label>
+              <input type="text" name="name" placeholder="Name">
+            </div>
+            <div class="field">
+              <label>Mobile Number</label>
+              <input type="number" name="mobile" placeholder="Mobile Number" value="7660957876">
+            </div>
+            <div class="field">
+              <label>Vehicle Number</label>
+              <input type="text" name="vehicle" placeholder="Vehicle Number">
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="Email">
+            </div>
+            <div class="field hidden-field" id="parkingField">
+                <label>Parking Number</label>
+                <input type="text" name="parkingNumber" placeholder="Parking Number">
+              </div>
+              <div class="field hidden-field" id="parkingField">
+                <label>Parking  place
+                </label>
+                <input type="text" name="parkingNumber" placeholder="Parking Number">
+              </div>
+              <div class="field hidden-field" id="statusField">
+                <label>Status</label>
+                <input type="text" name="status" placeholder="Status">
+              </div>
+              <button
+          class="ui primary button submit-button"
+          type="button"
+          onclick="submitForm()">
+          Submit
+        </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function submitForm() {
+        const form = document.getElementById("customerForm");
+        const formData = new FormData(form);
+        const formDataObject = {};
+        formData.forEach((value, key) => {
+        formDataObject[key] = value;
+        });
+
+      // Log the form data object for testing purposes
+      console.log(formDataObject);
+
+        fetch("http://localhost:80/save_customer.php", {
+          method: "POST",
+        body: JSON.stringify(formDataObject),   
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            console.log(data);
+            // After submitting the form, reload the customer table
+            // getCustomerDetails();
+          })
+          .catch((error) => console.error(error));
+      }
+
+  </script>
+</html>
